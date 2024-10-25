@@ -8,6 +8,7 @@ import {
   EventEmitter,
   OnDestroy,
   Inject,
+  afterNextRender,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TurnstileOptions } from './interfaces/turnstile-options';
@@ -57,7 +58,9 @@ export class NgxTurnstileComponent implements AfterViewInit, OnDestroy {
     private elementRef: ElementRef<HTMLElement>,
     private zone: NgZone,
     @Inject(DOCUMENT) private document: Document,
-  ) {}
+  ) {
+    afterNextRender(() => this.createWidget());
+  }
 
   private _getCloudflareTurnstileUrl(): string {
     if (this.version === '0') {
@@ -67,10 +70,11 @@ export class NgxTurnstileComponent implements AfterViewInit, OnDestroy {
     throw 'Version not defined in ngx-turnstile component.';
   }
 
-  public ngAfterViewInit(): void {
+  public createWidget(): void {
     let turnstileOptions: TurnstileOptions = {
       sitekey: this.siteKey,
       theme: this.theme,
+      language: this.language,
       tabindex: this.tabIndex,
       action: this.action,
       cData: this.cData,
