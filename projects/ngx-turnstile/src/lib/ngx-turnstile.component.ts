@@ -39,13 +39,14 @@ type SupportedVersion = '0';
   exportAs: 'ngx-turnstile',
 })
 export class NgxTurnstileComponent implements AfterViewInit, OnDestroy {
-  @Input() siteKey!: string;
-  @Input() action?: string;
-  @Input() cData?: string;
-  @Input() theme?: 'light' | 'dark' | 'auto' = 'auto';
-  @Input() version: SupportedVersion = '0';
-  @Input() tabIndex?: number;
-  @Input() appearance?: 'always' | 'execute' | 'interaction-only' = 'always';
+  @Input() siteKey: string = '';
+  @Input() action: string = '';
+  @Input() cData?: string = '';
+  @Input() theme?: string = 'auto';
+  @Input() language: string = 'en';
+  @Input() version: string  = '0';
+  @Input() tabIndex?: string = '0';
+  @Input() appearance?: string = 'always';
 
   @Output() resolved = new EventEmitter<string | null>();
   @Output() errored = new EventEmitter<string | null>();
