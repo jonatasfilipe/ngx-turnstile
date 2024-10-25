@@ -39,15 +39,15 @@ type SupportedVersion = '0';
   template: ``,
   exportAs: 'ngx-turnstile',
 })
-export class NgxTurnstileComponent implements OnDestroy {
-  @Input() siteKey!: string;
-  @Input() action?: string;
-  @Input() cData?: string;
-  @Input() theme?: 'light' | 'dark' | 'auto' = 'auto';
-  @Input() language?: string = 'auto';
-  @Input() version: SupportedVersion = '0';
-  @Input() tabIndex?: number;
-  @Input() appearance?: 'always' | 'execute' | 'interaction-only' = 'always';
+export class NgxTurnstileComponent implements AfterViewInit, OnDestroy {
+  @Input() siteKey: string = '';
+  @Input() action: string = '';
+  @Input() cData?: string = '';
+  @Input() theme?: string = 'auto';
+  @Input() language: string = 'en';
+  @Input() version: string  = '0';
+  @Input() tabIndex?: string = '0';
+  @Input() appearance?: string = 'always';
 
   @Output() resolved = new EventEmitter<string | null>();
   @Output() errored = new EventEmitter<string | null>();
